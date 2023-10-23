@@ -22,29 +22,38 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->validation($request->all());
+
+        $project = new Project();
+        $project->fill($data);
+        $project->save();
+
+        return redirect()->route('admin.projects.show')
+        ->with('message_type','success')
+        ->with('message','project created with success');
+        
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
     {
@@ -55,11 +64,11 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
     {
-        //
+        return view("admin.projects.edit", compact("project"));
     }
 
     /**
@@ -67,21 +76,53 @@ class ProjectController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $data = $this->validation($request->all(), $project->id);
+        $project->update($data);
+
+        return redirect()->route("admin.projects.show", $project)
+        ->with("message_type","success")
+        ->with("message","project updated with success");
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route("admin.projects.index")
+        ->with("message_type","success")
+        ->with("message","project eliminated with success");
+    }
+
+
+
+    private function validation($data) {
+        $validator = Validator::make(
+            $data, 
+            [
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+            'repository' => 'nullable|string',
+          ],
+          [
+            'name.required' => 'The name is required',
+            'name.string' => 'The name must be a string',
+
+            'description.string' => 'The description must be a string',
+            
+            'repository.string' => 'The thumb must be a url',
+          ]
+        )->validate();
+      
+        return $validator;
     }
 }

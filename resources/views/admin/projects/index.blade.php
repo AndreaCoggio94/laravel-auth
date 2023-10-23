@@ -3,6 +3,8 @@
 @section('content')
 <div class="container mt-5">
 
+    <a href="{{route('admin.projects.create')}}" class="btn btn-outline-primary">Add project</a>
+
     <table class="table">
         <thead>
           <tr>
@@ -25,6 +27,10 @@
               <td>{{$project->updated_at}}</td>
               <td>
                 <a href="{{ route('admin.projects.show' , $project) }}">More</a>
+                <a href="{{ route('admin.projects.edit' , $project)}}">Edit</a>
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Delete
+                  </button>
               </td>
             </tr>
             @empty
@@ -39,4 +45,8 @@
 
     {{ $projects->links('pagination::bootstrap-5')}}
 </div>
+@endsection
+
+@section('modal')
+    @include('partials._modalDelete')
 @endsection
