@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
@@ -43,7 +44,7 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->save();
 
-        return redirect()->route('admin.projects.show')
+        return redirect()->route('admin.projects.show', $project)
         ->with('message_type','success')
         ->with('message','project created with success');
         

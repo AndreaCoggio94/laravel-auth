@@ -14,7 +14,7 @@
             </div>
         @endif
         
-        <form action="{{route('admin.projects.update')}}" method="POST">
+        <form action="{{route('admin.projects.update', $project)}}" method="POST">
             @csrf
             @method('PUT')
             <div class="row">

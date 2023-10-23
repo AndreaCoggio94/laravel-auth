@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->text('repository');
-            $table->string('slug');
+            // $table->string('slug');
             $table->timestamps();
         });
     }
