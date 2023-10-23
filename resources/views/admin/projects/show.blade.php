@@ -29,3 +29,7 @@
         
     </div>
 @endsection
+
+@section('modal')
+    @include('partials._modalDelete')
+@endsection
