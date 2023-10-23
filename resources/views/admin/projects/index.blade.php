@@ -3,6 +3,6 @@
 @section('content')
 <div class="container mt-5">
 
-    @dump($posts)    
+    @dump($projects)    
 </div>
 @endsection
