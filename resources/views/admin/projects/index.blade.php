@@ -23,7 +23,9 @@
               <td>{{$project->slug}}</td>
               <td>{{$project->created_at}}</td>
               <td>{{$project->updated_at}}</td>
-              <td></td>
+              <td>
+                <a href="{{ route('admin.projects.show' , $project) }}">More</a>
+              </td>
             </tr>
             @empty
             <tr>
