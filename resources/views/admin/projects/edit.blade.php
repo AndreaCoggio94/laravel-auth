@@ -17,6 +17,11 @@
         <form action="{{route('admin.projects.update', $project)}}" method="POST">
             @csrf
             @method('PUT')
+            <div class="row mb-2">
+
+                <h1>Updating {{$project->name}}</h1>
+                
+            </div>
             <div class="row">
                 
                 <div class="mb-3 col">
@@ -27,20 +32,23 @@
                     @enderror
                 </div>
                 
-                <div class="mb-3 col">
-                    <label for="description" class="form-label @error('description') is-invalid @enderror">Description</label>
-                    {{-- <input type="text" name="description" id="description" value="{{ old('description') ?? $project->description  }}" class="form-control"> --}}
-                    <textarea name="description" id="description" cols="30" rows="10" class="form-control">"{{ old('description') ?? $project->description  }}</textarea>
-                    @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
                 
                 <div class="mb-3 col">
                     <label for="repository" class="form-label @error('repository') is-invalid @enderror">Repository link</label>
                     <input type="url" name="repository" id="repository" value="{{ old('repository') ?? $project->repository }}" class="form-control">
                     @error('repository')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="mb-3 col">
+                    <label for="description" class="form-label @error('description') is-invalid @enderror">Description</label>
+                    {{-- <input type="text" name="description" id="description" value="{{ old('description') ?? $project->description  }}" class="form-control"> --}}
+                    <textarea name="description" id="description" cols="30" rows="10" class="form-control">"{{ old('description') ?? $project->description  }}</textarea>
+                    @error('description')
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
