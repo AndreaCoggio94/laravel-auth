@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
 use App\Http\Controllers\Controller;
+
+
 
 class ProjectController extends Controller
 {
@@ -16,7 +21,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(1);
+        $projects = Project::paginate(10);
         return view("admin.projects.index", compact("projects"));
     }
 
@@ -42,6 +47,7 @@ class ProjectController extends Controller
 
         $project = new Project();
         $project->fill($data);
+        $project->slug = Str::slug($project->name);
         $project->save();
 
         return redirect()->route('admin.projects.show', $project)
@@ -83,6 +89,8 @@ class ProjectController extends Controller
     {
         $data = $this->validation($request->all(), $project->id);
         $project->update($data);
+
+        $project->slug = Str::slug($project->name);
 
         return redirect()->route("admin.projects.show", $project)
         ->with("message_type","success")
