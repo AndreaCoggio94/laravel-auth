@@ -26,8 +26,8 @@
               <td>{{$project->created_at}}</td>
               <td>{{$project->updated_at}}</td>
               <td>
-                <a href="{{ route('admin.projects.show' , $project) }}">More</a>
-                <a href="{{ route('admin.projects.edit' , $project)}}">Edit</a>
+                <a href="{{ route('admin.projects.show' , $project) }}" class="btn btn-outline-primary">More</a>
+                <a href="{{ route('admin.projects.edit' , $project)}}" class="btn btn-outline-primary">Edit</a>
                 <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$project->id}}">
                     Delete
                   </button>

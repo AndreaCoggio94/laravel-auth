@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="container mt-5">
-        <a href="{{route('admin.projects.index')}}" class="btn btn-outline-primary">Return to the list</a>
-        <a href="{{ route('admin.projects.edit', $project)}}" class="btn btn-warning mx-1">Edit this project</a>
-        
-          <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$project->id}}">
+        <a href="{{route('admin.projects.index')}}" class="btn btn-outline-primary mx-1">Return to the list</a>
+        <a href="{{ route('admin.projects.edit', $project)}}" class="btn btn-outline-primary mx-1">Edit this project</a>
+          <button type="button" class="btn btn-outline-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$project->id}}">
               Delete
             </button>
         <h1> {{ $project->name}}</h1>
